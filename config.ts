@@ -17,6 +17,7 @@ export default {
     phone1: "+923003009142",
     phone2: "+923264072206",
     instagram: "https://www.instagram.com/arvosolutions/",
+    facebook: "https://www.facebook.com/profile.php?id=61585306970126",
   },
   services: [
     {

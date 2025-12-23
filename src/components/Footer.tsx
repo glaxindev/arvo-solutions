@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Mail, Phone, MapPin, Instagram } from "lucide-react";
+import { Mail, Phone, MapPin, Instagram, Facebook } from "lucide-react";
 import config from "../../config.ts";
 
 const Footer = () => {
@@ -41,6 +41,14 @@ const Footer = () => {
               >
                 <Instagram className="h-4 w-4 text-primary" />
                 <span>Our Instagram</span>
+              </Link>
+              <Link
+                to={config.contact.facebook}
+                target="_blank"
+                className="flex items-center gap-3 text-muted-foreground hover:text-primary"
+              >
+                <Facebook className="h-4 w-4 text-primary" />
+                <span>Our Facebook</span>
               </Link>
               <div className="flex items-center gap-3 text-muted-foreground">
                 <MapPin className="h-4 w-4 text-primary" />
