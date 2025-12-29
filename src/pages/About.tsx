@@ -36,15 +36,14 @@ const About = () => {
             deliver projects — we deliver results that inspire.
           </p>
           <p className="text-lg text-muted-foreground mb-12 text-center">
-            It all started with a dream shared by two young visionaries — Saad
-            Memon and Abdul Rafay Zulqarnain. Driven by creativity and a love
-            for technology, we decided to build a solutions-based company while
-            still in our teenage years. What began as two friends experimenting
-            with ideas soon turned into Arvo Solutions, a brand dedicated to
-            helping businesses, creators, and startups unlock their full
-            potential in the digital world. We’ve grown through curiosity,
-            late-night brainstorming, and a never-ending belief that age doesn’t
-            define innovation — passion does.
+            Driven by creativity and a love for technology, we decided to build
+            a solutions-based company while still in our teenage years. What
+            began as friends experimenting with ideas soon turned into Arvo
+            Solutions, a brand dedicated to helping businesses, creators, and
+            startups unlock their full potential in the digital world. We’ve
+            grown through curiosity, late-night brainstorming, and a
+            never-ending belief that age doesn’t define innovation — passion
+            does.
           </p>
 
           <div className="mb-16">
