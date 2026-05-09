@@ -1,154 +1,272 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* ══════════════════════════════════════════════
+   ARVO SOLUTIONS — Premium Cream Design System
+   Inspired by Wisperflow.ai's warm institutional aesthetic
+   ══════════════════════════════════════════════ */
+@theme {
+  /* ── Cream Base Palette ── */
+  --color-cream: #f0ebe0;
+  --color-cream-dark: #e8e2d6;
+  --color-cream-border: #d8d2c6;
 
-@layer base {
-  :root {
-    --background: 0 0% 4%;
-    --foreground: 0 0% 98%;
+  /* ── Surface Colors (charcoal cards on cream bg) ── */
+  --color-bg-primary: #f0ebe0;
+  --color-charcoal-900: #f0ebe0;
+  --color-charcoal-800: #e8e2d6;
+  --color-charcoal-700: #111113;
+  --color-dark-card: #111113;
 
-    --card: 0 0% 8%;
-    --card-foreground: 0 0% 98%;
+  /* Accent — Arvo Teal */
+  --color-accent: #00A3C4;
+  --color-accent-dark: #007B9E;
 
-    --popover: 0 0% 8%;
-    --popover-foreground: 0 0% 98%;
+  /* ── Text on cream background ── */
+  --color-text-primary: #111113;
+  --color-text-secondary: rgba(17, 17, 19, 0.6);
+  --color-text-muted: rgba(17, 17, 19, 0.4);
 
-    --primary: 24 100% 63%;
-    --primary-foreground: 0 0% 10%;
+  /* ── Text on dark cards ── */
+  --color-card-text: #f0ebe0;
+  --color-card-muted: rgba(240, 235, 224, 0.5);
 
-    --secondary: 0 0% 12%;
-    --secondary-foreground: 0 0% 98%;
+  --color-glass: rgba(17, 17, 19, 0.03);
+  --color-glass-border: rgba(17, 17, 19, 0.08);
 
-    --muted: 0 0% 15%;
-    --muted-foreground: 0 0% 60%;
-
-    --accent: 24 100% 63%;
-    --accent-foreground: 0 0% 10%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-
-    --border: 0 0% 20%;
-    --input: 0 0% 20%;
-    --ring: 24 100% 63%;
-
-    --radius: 0.5rem;
-
-    --gradient-primary: linear-gradient(
-      135deg,
-      hsl(24, 100%, 63%),
-      hsl(30, 100%, 70%)
-    );
-    --gradient-hero: linear-gradient(
-      to right,
-      hsl(24, 100%, 63%),
-      hsl(280, 100%, 70%),
-      hsl(200, 100%, 60%)
-    );
-    --gradient-section: linear-gradient(
-      to top,
-      hsl(24, 100%, 63%, 0.05),
-      transparent
-    );
-    --ready-bg: 0 0% 6%;
-
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
-  }
-
-  .dark {
-    --background: 0 0% 4%;
-    --foreground: 0 0% 98%;
-
-    --card: 0 0% 8%;
-    --card-foreground: 0 0% 98%;
-
-    --popover: 0 0% 8%;
-    --popover-foreground: 0 0% 98%;
-
-    --primary: 24 100% 63%;
-    --primary-foreground: 0 0% 10%;
-
-    --secondary: 0 0% 12%;
-    --secondary-foreground: 0 0% 98%;
-
-    --muted: 0 0% 15%;
-    --muted-foreground: 0 0% 60%;
-
-    --accent: 24 100% 63%;
-    --accent-foreground: 0 0% 10%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-
-    --border: 0 0% 20%;
-    --input: 0 0% 20%;
-    --ring: 24 100% 63%;
-  }
+  /* ── Premium Typography ── */
+  --font-outfit: 'Outfit', sans-serif;
+  --font-serif: 'Playfair Display', serif;
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
 }
 
+/* ══════════════════════════════════════════════
+   BASE RESET
+   ══════════════════════════════════════════════ */
 @layer base {
-  * {
-    @apply border-border;
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+    background-color: #f0ebe0;
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply antialiased overflow-x-hidden;
+    background-color: #f0ebe0;
+    color: #111113;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 1rem;
+    line-height: 1.65;
   }
 
-  /* Custom Scrollbar */
-  ::-webkit-scrollbar {
-    width: 12px;
+  h1,
+  h2,
+  h3 {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    color: #111113;
+    line-height: 1.05;
   }
 
-  ::-webkit-scrollbar-track {
-    background: hsl(var(--background));
-    border-radius: 10px;
+  h4,
+  h5,
+  h6 {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 500;
+    color: #111113;
   }
 
-  ::-webkit-scrollbar-thumb {
-    background: linear-gradient(
-      135deg,
-      hsl(var(--primary)),
-      hsl(30, 100%, 70%)
-    );
-    border-radius: 10px;
-    border: 2px solid hsl(var(--background));
-    transition: background 0.3s ease;
+  /* Playfair Display for artistic italic accents */
+  .font-artistic {
+    font-family: 'Playfair Display', serif;
+    letter-spacing: -0.01em;
   }
 
-  ::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(
-      135deg,
-      hsl(var(--accent)),
-      hsl(var(--primary))
-    );
+  a {
+    text-decoration: none;
+    color: inherit;
   }
 
-  /* Firefox Scrollbar */
-  * {
-    scrollbar-width: thin;
-    scrollbar-color: hsl(var(--primary)) hsl(var(--background));
+  ::selection {
+    background: rgba(0, 163, 196, 0.2);
+    color: #111113;
   }
 }
 
-html {
-  scroll-behavior: smooth;
+/* ══════════════════════════════════════════════
+   UTILITIES
+   ══════════════════════════════════════════════ */
+@layer utilities {
+
+  /* Dark card surface (the bento card) */
+  .dark-card {
+    background-color: #111113;
+    border-radius: 1.5rem;
+    color: #f0ebe0;
+  }
+
+  /* Light card surface */
+  .light-card {
+    background-color: #ffffff;
+    border: 1px solid rgba(17, 17, 19, 0.08);
+    border-radius: 1.5rem;
+    color: #111113;
+  }
+
+  /* ── Buttons on cream background ── */
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    background: #111113;
+    color: #f0ebe0;
+    padding: 1rem 2.25rem;
+    border-radius: 100px;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    letter-spacing: -0.01em;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    border: 1px solid transparent;
+  }
+
+  .btn-primary:hover {
+    background: #00A3C4;
+    color: #ffffff;
+    transform: scale(1.02);
+    box-shadow: 0 12px 32px rgba(0, 163, 196, 0.2);
+  }
+
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    border: 1.5px solid rgba(17, 17, 19, 0.2);
+    background: transparent;
+    color: #111113;
+    padding: 1rem 2.25rem;
+    border-radius: 100px;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .btn-ghost:hover {
+    border-color: #00A3C4;
+    color: #00A3C4;
+    background: rgba(0, 163, 196, 0.04);
+  }
+
+  /* Accent button (for use inside dark cards) */
+  .btn-accent {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    background: #00A3C4;
+    color: #ffffff;
+    padding: 0.9rem 2rem;
+    border-radius: 100px;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600;
+    font-size: 0.85rem;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .btn-accent:hover {
+    background: #f0ebe0;
+    color: #111113;
+  }
+
+  /* ── Navbar ── */
+  .nav-link {
+    @apply relative font-sans text-[0.85rem] font-medium tracking-tight text-dark-card/60 transition-colors duration-300;
+  }
+
+  .nav-link:hover {
+    color: #111113;
+  }
+
+  .nav-link.active {
+    color: #00A3C4;
+  }
+
+  /* ── Section Tag ── */
+  .section-tag {
+    @apply font-mono text-[10px] tracking-[0.25em] uppercase text-accent flex items-center gap-3 mb-8;
+  }
+
+  .section-tag::before {
+    content: '';
+    @apply w-1.5 h-1.5 rounded-full bg-accent;
+  }
+
+  /* ── Marquee ── */
+  .marquee-track {
+    display: flex;
+    animation: marquee 40s linear infinite;
+    width: max-content;
+  }
+}
+
+/* ══════════════════════════════════════════════
+   ANIMATIONS
+   ══════════════════════════════════════════════ */
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes float-up {
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.animate-float {
+  animation: float-up 3s ease-in-out infinite;
+}
+
+@keyframes count-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bar-grow {
+  from {
+    height: 0%;
+  }
+
+  to {
+    height: var(--bar-h);
+  }
 }

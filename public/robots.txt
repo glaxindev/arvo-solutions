@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://www.arvosolutions.pro/sitemap_index.xml

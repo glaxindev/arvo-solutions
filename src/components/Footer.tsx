@@ -1,144 +1,168 @@
-import { Link } from "react-router-dom";
-import { Mail, Phone, MapPin, Instagram, Facebook } from "lucide-react";
-import config from "../../config.ts";
+import { Link } from 'react-router-dom';
+import { Magnetic } from './Magnetic';
+import { MessageCircle, Calendar, Mail, MapPin } from 'lucide-react';
 
-const Footer = () => {
+export function Footer() {
   return (
-    <footer className="border-t border-border bg-secondary">
-      <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          {/* Company Info */}
-          <div className="col-span-1 md:col-span-2">
-            <div className="flex items-center gap-2 mb-4">
-              <div className="h-8 w-8 rounded-lg bg-gradient-primary flex items-center justify-center overflow-hidden">
+    <footer className="bg-[#111113] pt-24 pb-0 relative overflow-hidden">
+
+      <div className="container mx-auto px-6 md:px-12 relative z-10">
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 mb-24">
+
+          {/* Left: Brand */}
+          <div className="max-w-xl">
+            <div className="flex items-center gap-2.5 mb-12 cursor-default">
+              {/* Logo: flat cream badge — same colour both sides so no mismatch */}
+              <div
+                className="flex items-center justify-center flex-shrink-0 rounded-2xl overflow-hidden"
+                style={{ width: '52px', height: '52px', background: '#f0ebe0' }}
+              >
                 <img
-                  src="/logo.png"
-                  alt="Arvo Logo"
-                  className="h-6 w-6 object-contain"
+                  src="/assets/arvo-logo.png"
+                  alt="Arvo"
+                  className="w-full h-full object-contain"
+                  style={{ filter: 'invert(1)', mixBlendMode: 'multiply' }}
                 />
               </div>
-              <span className="text-xl font-bold text-foreground">
-                Arvo Solutions
-              </span>
+              <div className="flex items-baseline gap-[3px] leading-none">
+                <span className="font-outfit text-[#f0ebe0] tracking-[-0.04em] text-xl" style={{ fontWeight: 800 }}>
+                  Arvo
+                </span>
+                <span className="font-outfit text-[#f0ebe0]/50 tracking-[-0.03em] text-xl" style={{ fontWeight: 600 }}>
+                  Solutions
+                </span>
+              </div>
             </div>
-            <p className="text-muted-foreground mb-6 max-w-md">
-              Empowering businesses with innovative digital solutions. We
-              transform ideas into powerful digital experiences.
+
+            <h3 className="text-3xl md:text-5xl font-semibold mb-8 tracking-tighter leading-[0.95] text-[#f0ebe0]">
+              Let's build something <br />
+              <span className="text-accent italic font-artistic">extraordinary.</span>
+            </h3>
+
+            <p className="text-[#f0ebe0]/50 text-base leading-relaxed mb-10 font-light max-w-md">
+              Ready to transform your digital presence? Book a free 30-minute
+              strategy call with our team.
             </p>
-            <div className="space-y-3">
-              <div className="flex items-center gap-3 text-muted-foreground">
-                <Mail className="h-4 w-4 text-primary" />
-                <span>{config.contact.email}</span>
-              </div>
-              <div className="flex items-center gap-3 text-muted-foreground">
-                <Phone className="h-4 w-4 text-primary" />
-                <span>{config.contact.phone1}</span>
-              </div>
-              <Link
-                to={config.contact.instagram}
-                target="_blank"
-                className="flex items-center gap-3 text-muted-foreground hover:text-primary"
+
+            {/* Contact details */}
+            <div className="space-y-4 mb-10">
+              <a
+                href="mailto:contact@arvosolutions.pro"
+                className="flex items-center gap-3 text-[#f0ebe0]/40 hover:text-[#f0ebe0] transition-colors group"
               >
-                <Instagram className="h-4 w-4 text-primary" />
-                <span>Our Instagram</span>
-              </Link>
-              <Link
-                to={config.contact.facebook}
+                <div className="w-8 h-8 rounded-xl bg-white/[0.04] border border-white/[0.06] flex items-center justify-center flex-shrink-0 group-hover:border-accent/30 transition-colors">
+                  <Mail className="w-3.5 h-3.5 text-accent/60 group-hover:text-accent" />
+                </div>
+                <span className="text-sm font-mono tracking-wide">contact@arvosolutions.pro</span>
+              </a>
+
+              <a
+                href="https://wa.me/923003009142"
                 target="_blank"
-                className="flex items-center gap-3 text-muted-foreground hover:text-primary"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 text-[#f0ebe0]/40 hover:text-[#f0ebe0] transition-colors group"
               >
-                <Facebook className="h-4 w-4 text-primary" />
-                <span>Our Facebook</span>
-              </Link>
-              <div className="flex items-center gap-3 text-muted-foreground">
-                <MapPin className="h-4 w-4 text-primary" />
-                <span>Hyderabad, PK</span>
+                <div className="w-8 h-8 rounded-xl bg-white/[0.04] border border-white/[0.06] flex items-center justify-center flex-shrink-0 group-hover:border-green-400/30 transition-colors">
+                  <MessageCircle className="w-3.5 h-3.5 text-green-400/60 group-hover:text-green-400" />
+                </div>
+                <span className="text-sm font-mono tracking-wide">WhatsApp: +92 300 300 9142</span>
+              </a>
+
+              <div className="flex items-center gap-3 text-[#f0ebe0]/30">
+                <div className="w-8 h-8 rounded-xl bg-white/[0.04] border border-white/[0.06] flex items-center justify-center flex-shrink-0">
+                  <MapPin className="w-3.5 h-3.5 text-accent/40" />
+                </div>
+                <span className="text-sm font-mono tracking-wide">Hyderabad, PK · Global Operations</span>
               </div>
+            </div>
+
+            {/* CTA buttons */}
+            <div className="flex flex-wrap gap-3">
+              <Magnetic strength={0.15}>
+                <Link to="/briefing" className="btn-accent !px-8 !py-3.5 text-sm">
+                  Book Free Strategy Call
+                </Link>
+              </Magnetic>
+
+              <a
+                href="https://calendly.com/saadmemon-arvosolutions"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 px-8 py-3.5 rounded-full border border-white/10 text-[#f0ebe0]/70 hover:border-accent/40 hover:text-[#f0ebe0] transition-all duration-300 text-sm font-semibold font-outfit"
+              >
+                <Calendar className="w-4 h-4" />
+                Schedule a Call
+              </a>
             </div>
           </div>
 
-          {/* Quick Links */}
-          <div>
-            <h3 className="text-foreground font-semibold mb-4">Quick Links</h3>
-            <ul className="space-y-2">
-              <li>
-                <a
-                  href="/#"
-                  className="text-muted-foreground hover:text-primary transition-colors"
-                >
-                  Home Page
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/#why-choose"
-                  className="text-muted-foreground hover:text-primary transition-colors"
-                >
-                  Why Choose Us
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/#services"
-                  className="text-muted-foreground hover:text-primary transition-colors"
-                >
-                  Our Services
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/#ready"
-                  className="text-muted-foreground hover:text-primary transition-colors"
-                >
-                  Get Started
-                </a>
-              </li>
-              <li>
-                <Link
-                  to="/about"
-                  className="text-muted-foreground hover:text-primary transition-colors"
-                >
-                  About Us
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/contact"
-                  className="text-muted-foreground hover:text-primary transition-colors"
-                >
-                  Contact
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Services */}
-          <div>
-            <h3 className="text-foreground font-semibold mb-4">Services</h3>
-            <ul className="space-y-2">
-              {config.services.map((service) => (
-                <li key={service.name}>
-                  <Link
-                    to={service.url}
-                    className="text-muted-foreground hover:text-primary transition-colors"
-                  >
-                    {service.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+          {/* Right: Navigation */}
+          <div className="grid grid-cols-2 gap-12 pt-6">
+            <div>
+              <h4 className="font-mono text-[9px] tracking-[0.4em] text-accent uppercase mb-8">Navigation</h4>
+              <ul className="space-y-5">
+                {[
+                  { label: 'Home',     to: '/' },
+                  { label: 'Services', to: '/solutions' },
+                  { label: 'Showcase', to: '/showcase' },
+                  { label: 'Pricing',  to: '/pricing' },
+                  { label: 'Brief Us', to: '/briefing' },
+                ].map(link => (
+                  <li key={link.to}>
+                    <Link to={link.to} className="text-[#f0ebe0]/40 hover:text-[#f0ebe0] transition-colors text-sm tracking-wide block">
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-mono text-[9px] tracking-[0.4em] text-accent uppercase mb-8">Connect</h4>
+              <ul className="space-y-5">
+                {[
+                  { label: 'Facebook',  href: 'https://www.facebook.com/profile.php?id=61585306970126' },
+                  { label: 'Instagram', href: 'https://www.instagram.com/arvosolutions/' },
+                  { label: 'LinkedIn',  href: '#' },
+                  { label: 'WhatsApp',  href: 'https://wa.me/923003009142' },
+                  { label: 'Calendly',  href: 'https://calendly.com/saadmemon-arvosolutions' },
+                ].map(link => (
+                  <li key={link.label}>
+                    <a
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[#f0ebe0]/40 hover:text-[#f0ebe0] transition-colors text-sm tracking-wide block"
+                    >
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
 
-        {/* Copyright */}
-        <div className="mt-12 pt-8 border-t border-border text-center">
-          <p className="text-muted-foreground">
-            © {new Date().getFullYear()} Arvo Solutions. All rights reserved.
+        {/* Legal bar */}
+        <div className="py-8 border-t border-white/[0.05] flex flex-col md:flex-row justify-between items-center gap-4 relative z-10">
+          <p className="font-mono text-[9px] text-[#f0ebe0]/20 tracking-[0.4em] uppercase">
+            © {new Date().getFullYear()} Arvo Solutions · All rights reserved
+          </p>
+          <p className="font-mono text-[9px] text-[#f0ebe0]/20 tracking-[0.4em] uppercase">
+            Strategy · Design · Engineering
           </p>
         </div>
       </div>
+
+      {/* ARVO watermark */}
+      <div className="flex justify-center overflow-hidden pointer-events-none mt-[-20px]">
+        <h1
+          className="font-outfit font-bold text-[22vw] leading-none select-none text-transparent whitespace-nowrap"
+          style={{ WebkitTextStroke: '1px rgba(240, 235, 224, 0.04)' }}
+        >
+          ARVO
+        </h1>
+      </div>
     </footer>
   );
-};
-
-export default Footer;
+}

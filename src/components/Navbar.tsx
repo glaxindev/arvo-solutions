@@ -1,209 +1,115 @@
-import { Link } from "react-router-dom";
-import { Button } from "@/components/ui/button";
-import {
-  Menu,
-  Home,
-  Briefcase,
-  Info,
-  MessageSquare,
-  Mail,
-  Phone,
-  UserPlus,
-  ChevronDown,
-  Instagram,
-} from "lucide-react";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import config from "../../config.ts";
+import { useState, useEffect } from 'react';
+import { Link, NavLink } from 'react-router-dom';
+import { Magnetic } from './Magnetic';
+import { Menu, X } from 'lucide-react';
 
-const services = config.services;
+export function Navbar() {
+  const [scrolled, setScrolled] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
-const Navbar = () => {
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 50);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
-    <nav className="fixed top-4 left-4 right-4 z-50 mx-auto max-w-7xl">
-      <div className="rounded-full border border-border bg-background/80 backdrop-blur-lg shadow-lg px-6">
-        <div className="flex h-20 items-center justify-between">
-          {/* Logo */}
-          <Link to="/" className="flex items-center gap-3">
-            <div className="h-10 w-10 rounded-lg bg-gradient-primary flex items-center justify-center">
-              <img src="/logo.png" alt="Arvo Logo" className="h-8 w-8" />
-            </div>
-            <span className="text-2xl font-bold text-foreground">
-              Arvo Solutions
+    <nav
+      className={`fixed top-0 left-0 w-full z-[100] transition-all duration-500 ${
+        scrolled
+          ? 'py-3 bg-cream/92 backdrop-blur-xl border-b border-black/[0.06] shadow-sm shadow-black/[0.04]'
+          : 'py-5 bg-transparent'
+      }`}
+    >
+      <div className="container mx-auto px-6 md:px-12 flex justify-between items-center">
+
+        {/* ── Brand Logomark + Wordmark ── */}
+        <Link to="/" className="flex items-center gap-1.5 group select-none">
+          {/* Logo mark — flat cream badge, no shadow/border to avoid color mismatch */}
+          <div
+            className="flex items-center justify-center flex-shrink-0 rounded-2xl overflow-hidden"
+            style={{ width: '68px', height: '68px', background: '#f0ebe0' }}
+          >
+            <img
+              src="/assets/arvo-logo.png"
+              alt="Arvo logo"
+              className="w-full h-full object-contain"
+              style={{ filter: 'invert(1)', mixBlendMode: 'multiply' }}
+            />
+          </div>
+
+          {/* Wordmark — bold, authoritative, no italic, no serif */}
+          <div className="flex items-baseline gap-[3px] leading-none">
+            <span
+              className="font-outfit text-dark-card tracking-[-0.04em]"
+              style={{ fontWeight: 800, fontSize: '1.35rem' }}
+            >
+              Arvo
             </span>
-          </Link>
-
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
-            <a
-              href="/#"
-              className="relative flex items-center gap-2 text-base font-semibold text-foreground hover:text-primary transition-colors group"
+            <span
+              className="font-outfit text-[#777773] tracking-[-0.03em]"
+              style={{ fontWeight: 600, fontSize: '1.35rem' }}
             >
-              <Home size={18} />
-              Home
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
-            </a>
-            <DropdownMenu>
-              <DropdownMenuTrigger className="relative flex items-center gap-2 text-base font-semibold text-foreground hover:text-primary transition-colors group">
-                <Briefcase size={18} />
-                Services
-                <ChevronDown size={16} />
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="bg-background/95 backdrop-blur-xl border-border/50 rounded-2xl shadow-xl min-w-[200px]">
-                {services.map((service) => (
-                  <DropdownMenuItem
-                    key={service.name}
-                    asChild
-                    className="font-bold text-base hover:text-primary hover:bg-primary/10 rounded-xl m-1"
-                  >
-                    <Link to={service.url} className="cursor-pointer">
-                      {service.name}
-                    </Link>
-                  </DropdownMenuItem>
-                ))}
-              </DropdownMenuContent>
-            </DropdownMenu>
-            <Link
-              to="/about"
-              className="relative flex items-center gap-2 text-base font-semibold text-foreground hover:text-primary transition-colors group"
-            >
-              <Info size={18} />
-              About
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
-            </Link>
-            <Link
-              to="/contact"
-              className="relative flex items-center gap-2 text-base font-semibold text-foreground hover:text-primary transition-colors group"
-            >
-              <MessageSquare size={18} />
-              Contact
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
-            </Link>
+              Solutions
+            </span>
           </div>
+        </Link>
 
-          {/* Contact Icons & Signup Button */}
-          <div className="hidden md:flex items-center gap-4">
-            <a
-              href={`mailto:${config.contact.email}`}
-              className="text-foreground hover:text-primary transition-colors"
-            >
-              <Mail size={20} />
-            </a>
-            <a
-              href={`tel:${config.contact.phone1}`}
-              className="text-foreground hover:text-primary transition-colors"
-            >
-              <Phone size={20} />
-            </a>
-            <a
-              href={config.contact.instagram}
-              target="_blank"
-              className="text-foreground hover:text-primary transition-colors"
-            >
-              <Instagram size={20} />
-            </a>
-            <a href="/contact">
-              <Button className="bg-primary text-primary-foreground hover:bg-primary/90 flex items-center gap-2">
-                <UserPlus size={18} />
-                Sign Up
-              </Button>
-            </a>
-          </div>
+        {/* ── Desktop Nav ── */}
+        <div className="hidden md:flex items-center gap-9">
+          <NavLink to="/" end className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>Home</NavLink>
+          <NavLink to="/solutions" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>Services</NavLink>
+          <NavLink to="/product" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>Product</NavLink>
+          <NavLink to="/showcase" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>Showcase</NavLink>
+          <NavLink to="/about" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>About</NavLink>
+          <NavLink to="/pricing" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>Pricing</NavLink>
 
-          {/* Mobile Menu */}
-          <Sheet>
-            <SheetTrigger asChild className="md:hidden">
-              <Button variant="ghost" size="icon" className="rounded-full">
-                <Menu className="h-6 w-6" />
-              </Button>
-            </SheetTrigger>
-            <SheetContent
-              side="right"
-              className="bg-background/95 backdrop-blur-xl border-border/50"
-            >
-              <div className="flex flex-col gap-6 mt-8">
-                <Link
-                  to="/"
-                  className="flex items-center gap-3 text-lg font-bold text-foreground hover:text-primary transition-colors"
-                >
-                  <Home size={20} />
-                  Home
-                </Link>
-                <div className="flex flex-col gap-3">
-                  <div className="flex items-center gap-3 text-lg font-bold text-foreground">
-                    <Briefcase size={20} />
-                    Services
-                  </div>
-                  {services.map((service) => (
-                    <Link
-                      key={service.name}
-                      to={service.url}
-                      className="text-base font-semibold text-muted-foreground hover:text-primary transition-colors ml-8"
-                    >
-                      {service.name}
-                    </Link>
-                  ))}
-                </div>
-                <Link
-                  to="/about"
-                  className="flex items-center gap-3 text-lg font-bold text-foreground hover:text-primary transition-colors"
-                >
-                  <Info size={20} />
-                  About
-                </Link>
-                <Link
-                  to="/contact"
-                  className="flex items-center gap-3 text-lg font-bold text-foreground hover:text-primary transition-colors"
-                >
-                  <MessageSquare size={20} />
-                  Contact
-                </Link>
-
-                {/* Contact Icons */}
-                <div className="flex items-center gap-6 pt-4 border-t border-border">
-                  <a
-                    href={`mailto:${config.contact.email}`}
-                    className="flex items-center gap-2 text-foreground hover:text-primary transition-colors"
-                  >
-                    <Mail size={20} />
-                    <span className="text-sm font-semibold">Email</span>
-                  </a>
-                  <a
-                    href={`tel:${config.contact.phone1}`}
-                    className="flex items-center gap-2 text-foreground hover:text-primary transition-colors"
-                  >
-                    <Phone size={20} />
-                    <span className="text-sm font-semibold">Call</span>
-                  </a>
-                  <a
-                    href={config.contact.instagram}
-                    target="_blank"
-                    className="flex items-center gap-2 text-foreground hover:text-primary transition-colors"
-                  >
-                    <Instagram size={20} />
-                    <span className="text-sm font-semibold">Instagram</span>
-                  </a>
-                </div>
-
-                <a href="/contact">
-                  <Button className="bg-primary text-primary-foreground hover:bg-primary/90 mt-4 flex items-center gap-2">
-                    <UserPlus size={18} />
-                    Sign Up
-                  </Button>
-                </a>
-              </div>
-            </SheetContent>
-          </Sheet>
+          <Magnetic strength={0.3}>
+            <Link to="/briefing" className="btn-primary !py-2.5 !px-7 !text-sm">
+              Book a Call
+            </Link>
+          </Magnetic>
         </div>
+
+        {/* ── Mobile Menu Toggle ── */}
+        <button
+          className="md:hidden w-9 h-9 flex items-center justify-center text-dark-card"
+          onClick={() => setMobileOpen(!mobileOpen)}
+          aria-label="Toggle menu"
+        >
+          {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+        </button>
       </div>
+
+      {/* ── Mobile Dropdown ── */}
+      {mobileOpen && (
+        <div className="md:hidden bg-cream border-t border-black/[0.06] px-6 py-6 flex flex-col gap-5">
+          {[
+            { label: 'Home',      to: '/' },
+            { label: 'Services',  to: '/solutions' },
+            { label: 'Product',   to: '/product' },
+            { label: 'Showcase',  to: '/showcase' },
+            { label: 'About',     to: '/about' },
+            { label: 'Pricing',   to: '/pricing' },
+          ].map(link => (
+            <Link
+              key={link.to}
+              to={link.to}
+              onClick={() => setMobileOpen(false)}
+              className="text-dark-card font-outfit font-semibold text-lg tracking-tight hover:text-accent transition-colors"
+            >
+              {link.label}
+            </Link>
+          ))}
+          <Link
+            to="/briefing"
+            onClick={() => setMobileOpen(false)}
+            className="btn-primary !py-3 !text-sm mt-2"
+          >
+            Book a Call
+          </Link>
+        </div>
+      )}
     </nav>
   );
-};
-
-export default Navbar;
+}
